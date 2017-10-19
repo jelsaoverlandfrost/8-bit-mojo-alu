@@ -1,0 +1,25 @@
+module shifter (
+    input clk,  // clock
+    output out[8]
+  ) {
+  
+  sig alufn;
+  sig shift[5];
+  sig test[8];
+
+  always {
+    test = 8b01010101;
+    alufn = 2b00;
+    shift = 3b010;
+    case(alufn){
+      2b00:
+        out = test << shift;
+      2b01:
+        out = test >> shift;
+      2b11:
+        out = $signed(test) >>> shift;
+      default:
+        out = 8b00000000;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+module comparator (
+    input clk,  // clock
+    output out[8]
+  ) {
+
+  sig v;
+  sig alufn[2];
+  sig n;
+  sig z;
+always {
+  z = 1;
+  v = 1;
+  n = 0;
+  alufn = 2b10;
+  case (alufn){
+      1:
+        out[0] = z;
+        out[7:1] = 7b0000000;
+      2:
+        out[0] = (n ^ v);
+        out[7:1] = 7b0000000;
+      3:
+        out[0] = z + (n ^ v);
+        out[7:1] = 7b0000000;
+      default:
+        out = 8b00000000;
+    }
+  }
+}

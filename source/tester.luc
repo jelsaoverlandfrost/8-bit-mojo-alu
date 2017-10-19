@@ -1,0 +1,91 @@
+module tester (
+    input clk,
+    output correctanswer[8],
+    output question[22],
+    input walker[5]
+  ) {
+  
+  always {
+    case(walker){
+      0:
+        question = 22b00000000000000100010011; // Normal adding ADD: two positive numbers
+        correctanswer = 8b00010100;
+      1:
+        question = 22b0000000111111100000001; // Overflow adding ADD: two positive numbers
+        correctanswer = 8b10000000;
+      2:
+        question = 22b0000001111000010011000; // Normal adding ADD: two negative numbers
+        correctanswer = 8b10001000;
+      3:
+        question = 22b0000001000000010000000; // Overflow adding ADD: two negative numbers
+        correctanswer = 8b00000000;
+      4:
+        question = 22b0000001000100001101101; // Normal adding ADD: one positive one negative
+        correctanswer = 8b11110101;
+      5:
+        question = 22b0000010001000000000111; // Normal Substracting SUB: two positive numbers
+        correctanswer = 8b00001001;
+      6:
+        question = 22b0000011001000011010000; // Normal Substracting SUB: two negative numbers
+        correctanswer = 8b11000000;
+      7:
+        question = 22b0000010111111111111111; // Overflow Substracting SUB: one positive one negative
+        correctanswer = 8b10000000;
+      8:
+        question = 22b0000011000000101111111; // Overflow Substracting SUB: one negative one positive
+        correctanswer = 8b00000010;
+      9:
+        question = 22b0110000011001101010101; // Boolean operation AND: test, includes all the entries in truth table
+        correctanswer = 8b00010001;
+      10:
+        question = 22b0111100011001101010101; // Boolean operation OR: test, includes all the entries in truth table
+        correctanswer = 8b01110111;
+      11:
+        question = 22b0101100011001101010101; // Boolean operation XOR: test, includes all the entries in truth table
+        correctanswer = 8b01100110;
+      12:
+        question = 22b0110100011001101010101; // Boolean operation "A"(LDR): test, includes all the entries in truth table
+        correctanswer = 8b00110011;
+      13:
+        question = 22b1000000000000100000111; // Shifting operation SHL: shifting left for 7 bits
+        correctanswer = 8b10000000;
+      14:
+        question = 22b1000011000000000000111; // Shifting operation SHR: shifting right for 7 bits
+        correctanswer = 8b00000001;
+      15:
+        question = 22b1000111000000000000111; // Shifting operation SRA: shifting right with sign extension for 7 bits 
+        correctanswer = 8b11111111;
+      16:
+        question = 22b1000110111111100000111; // Shifting operation SRA: shifting rigth with sign extension for 7 bits
+        correctanswer = 8b00000000;
+        
+      17:
+        question = 22b1100110000100000001000; // Compare operation CMPEQ: Compares if the two numbers equal to each other, this is the true case.
+        correctanswer = 8b00000001;
+      18:
+        question = 22b1100111111111110011001; // Compare operation CMPEQ: Compares if the two numbers equal to each other, this is the false case.
+        correctanswer = 8b00000000;
+      19:
+        question = 22b1101010000010000001000; // Compare operation CMPLT: Comapare if a is smaller than b, this is the true case.
+        correctanswer = 8b00000001;  
+      20:
+        question = 22b1101010000100000000010; // Compare operation CMPLT: Comapare if a is smaller than b, this is the false case.
+        correctanswer = 8b00000000;
+      21:
+        question = 22b1101110000100000001000; // Compare operation CMPLE: Comapare if a is smaller or equal to b, this is the true case.
+        correctanswer = 8b00000001;
+      22:
+        question = 22b1101110000010000001000; //Compare operation CMPLE: Comapare if a is smaller or equal to b, this is the false case.
+        correctanswer = 8b00000001;
+      23:
+        question = 22b0000100001101100000011; // Multiplication MUL: Multiplies a and b
+        correctanswer = 8b01010001;
+      24:
+        question = 22b0000110001101100000011; // Division DIV: Divide a over b
+        correctanswer = 8b00001001;
+      default:
+        question = 0;
+        correctanswer = 0;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+module boolean (
+    input clk,  // clock
+    output out[8]
+  ) {
+
+  sig alufn[4];
+  sig inputA[8];
+  sig inputB[8];
+  
+  always {
+    alufn = 4b1000;
+    inputA = 8b10101010;
+    inputB = 8b01010110;
+    
+    case(alufn){
+      8:
+        out = inputA & inputB;
+      14:
+        out = inputA | inputB;
+      6:
+        out = inputA ^ inputB;
+      10:
+        out = inputA;
+      default:
+        out = 8b11111111;
+    }
+  }
+}

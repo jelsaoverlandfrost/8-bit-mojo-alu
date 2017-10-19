@@ -1,0 +1,22 @@
+module multiplier (
+    input clk,  // clock
+    output out[8]
+  ) {
+
+  sig alufn[2];
+  sig inputA[8];
+  sig inputB[8];
+  
+  always {
+    alufn = 2b10;
+    inputA = 8b10101101;
+    inputB = 8b00000011;
+    
+    case (alufn){
+      2:
+        out = inputA / inputB;
+      default:
+        out = 8b11111111;
+    }
+  }
+}
